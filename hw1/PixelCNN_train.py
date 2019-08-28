@@ -15,7 +15,6 @@ import torchvision.transforms as T
 eps = np.finfo(float).eps
 
 import tqdm
-from torchsummary import summary
 import os
 
 os.environ["CUDA_VISIBLE_DEVICES"] = str(3)
@@ -26,7 +25,8 @@ print(use_cuda)
 
 
 batch_size = 64
-train_valid, x_test = utils.load_data('mnist-hw1.pkl')
+train_valid, x_test = utils.load_data('../data/mnist-hw1.pkl')
+
 x_train = train_valid[:int(len(train_valid)*0.8)]
 x_valid = train_valid[int(len(train_valid)*0.8):]
 
@@ -65,7 +65,6 @@ def train_validate(model, dataloader, optim, loss_fn, train):
 
 model = PixelCNN(128)
 model = model.cuda() if use_cuda else model
-summary(model, input_size=(3,28,28))
 model.apply(utils.init_weights)
 
 optim = torch.optim.Adam(model.parameters(), 1e-3, weight_decay=1e-4)

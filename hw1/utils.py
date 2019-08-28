@@ -24,6 +24,8 @@ class CMNIST(Dataset):
         x = self.transform(x)
 
         return x
+
+
 def load_data(path):
     with open(path, 'rb') as fp:
         data = pickle.load(fp)
