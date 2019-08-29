@@ -1,6 +1,6 @@
-import torch
 from torch import nn
 import torch.nn.functional as F
+
 
 class MaskedConv2d(nn.Conv2d):
     def __init__(self, mask_type, *args, **kwargs):
@@ -89,8 +89,7 @@ class PixelCNN(nn.Module):
 
         self.network = nn.Sequential(*self.network)
 
-
     def forward(self, x):
         x = self.network(x)
-        x = x.reshape(x.size(0) , 4, 3 , 28, 28)
+        x = x.reshape(x.size(0), 4, 3, 28, 28)
         return x
